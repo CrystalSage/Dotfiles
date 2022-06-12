@@ -1,0 +1,1 @@
+/home/bourbon/.fzf/shell/key-bindings.fish

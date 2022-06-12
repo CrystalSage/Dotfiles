@@ -21,7 +21,7 @@
 background = #1d1f21
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
-foreground = #c5c8c6
+foreground = #ebdbb2
 foreground-alt = #555
 primary =  #f0c674
 secondary = #e60053
@@ -52,14 +52,14 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0=JetBrainsMono Nerd Font Mono:pixelsize=10:style=Medium;
+font-0=JetBrainsMono Nerd Font Mono:pixelsize=11:style=Medium;
 font-1 = Material Icons:size=12;3
 font-2 = unifont:fontformat=truetype:size=64:antialias=false;1
 font-3 = siji:pixelsize=10;1
 
 modules-left = date bspwm xwindow
 modules-center = mpd
-modules-right = pulseaudio menu-apps
+modules-right = battery pulseaudio menu-apps
 
 tray-position = right
 tray-padding = 2
@@ -173,6 +173,76 @@ label-muted-foreground = #c5c8c6
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:40:...%
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+low-at = 15 
+
+battery = BAT0
+adapter = AC
+
+;format-charging = <label-charging> <animation-charging>
+label-charging = Charging %percentage%%
+
+format-discharging = 
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
+
+ramp-capacity-foreground=#c5c6c8
+ramp-capacity-underline=#ff6666
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
+
+format-low = <ramp-capacity> <animation-low>
+animation-low-0 = !
+animation-low-1 = 
+animation-low-framerate = 200
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+poll-interval = 5
+
+[module/backlight]
+type = internal/backlight
+card = amdgpu_bl0
+
+use-actual-brightness = true
+
+; Enable changing the backlight with the scroll wheel
+; NOTE: This may require additional configuration on some systems. Polybar will
+; write to `/sys/class/backlight/${self.card}/brightness` which requires polybar
+; to have write access to that file.
+; DO NOT RUN POLYBAR AS ROOT. 
+; The recommended way is to add the user to the
+; `video` group and give that group write-privileges for the `brightness` file.
+; See the ArchWiki for more information:
+; https://wiki.archlinux.org/index.php/Backlight#ACPI
+; Default: false
+enable-scroll = true
 
 
 [module/menu-apps]

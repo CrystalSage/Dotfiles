@@ -10,8 +10,9 @@ picom -b &
 mpd &
 xsetroot -cursor_name left_ptr &
 setxkbmap -layout us -option ctrl:swapcaps &
+xinput set-prop "ETPS/2 Elantech Touchpad" 300 0 &
+xinput set-prop "ETPS/2 Elantech Touchpad" 323 1 &
 dunst &
-xrandr --output HDMI-0 --brightness 0.7
 
 bspc monitor -d I II III IV V
 
@@ -28,4 +29,7 @@ bspc rule -a Signal state=floating desktop=^5
 bspc rule -a Emacs state=tiled
 bspc rule -a feh state=floating
 bspc rule -a Zathura state=tiled
+bspc rule -a Pavucontrol state=floating
 bspc rule -a '*:Custom_ncmpcpp' state=floating
+bspc rule -a 'burp-StartBurp' state=floating
+bspc rule -a 'ghidra-Ghidra' state=floating

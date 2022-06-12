@@ -9,6 +9,7 @@ super + Return
 super + d
 	rofi -modi drun,run -show drun
 
+
 super + shift + f
 	firefox
 
@@ -18,9 +19,21 @@ super + shift + s
 super + shift + n
 	alacritty --class Custom_ncmpcpp -e ncmpcpp
 
+super + shift + d
+	alacritty --class TodoClass -e nvim ~/todo
+
+super + shift + b
+	notify-send "Battery at" (batstat)%
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+XF86AudioMicMute
+	amixer set Capture toggle
+	
+XF86AudioMute
+	amixer set Master toggle
 
 super + g
 	bspc node newest.local -s biggest.local
