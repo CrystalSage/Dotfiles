@@ -7,8 +7,10 @@ abbr -a cx 'xclip -selection clipboard'
 
 
 abbr -a g git
-abbr -a gc 'git checkout'
 abbr -a ga 'git add -p'
+abbr -a gc 'git checkout'
+abbr -a gp 'git push' 
+abbr -a gs 'git status'
 abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 
 set -U fish_greeting ""
