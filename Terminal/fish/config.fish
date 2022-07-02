@@ -25,7 +25,7 @@ function apull
 end
 
 function mntusb
-  sudo mount -o umask=0 /dev/sdc1 /run/media/bourbon/usb
+  sudo mount -o umask=0 /dev/sda1 /run/media/bourbon/usb
   cd /run/media/bourbon/usb
 end
 
