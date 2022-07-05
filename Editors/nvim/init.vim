@@ -169,9 +169,6 @@ map L $
 vmap Y "+y
 nnoremap P "+p 
 
-" Greatest remap ever
-xnoremap <leader>p "_dP
-
 " Leader prefixed shortcuts
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>tb :Tabularize /\|<CR>
@@ -196,6 +193,9 @@ nnoremap <leader>) dt)
 nnoremap <leader>_ dt_
 nnoremap <leader>, dt,
 
+" Window positioning and stuff
+nnoremap <leader>vm <C-W>\|
+nnoremap <leader>vr <C-W>=
 
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
