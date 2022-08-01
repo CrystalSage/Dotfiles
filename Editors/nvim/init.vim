@@ -44,7 +44,6 @@ set encoding=utf-8
 set scrolloff=2
 set noshowmode
 set hidden
-set nowrap
 set nojoinspaces
 let g:sneak#s_next = 1
 let g:vim_markdown_new_list_item_indent = 0
@@ -193,9 +192,12 @@ nnoremap <leader>) dt)
 nnoremap <leader>_ dt_
 nnoremap <leader>, dt,
 
-" Window positioning and stuff
+" Window positioning
 nnoremap <leader>vm <C-W>\|
 nnoremap <leader>vr <C-W>=
+
+" Project shortcuts
+nnoremap <leader>ps :Rg<CR>
 
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
@@ -394,3 +396,4 @@ let g:vimtex_compiler_latexmk = {
     \   '-interaction=nonstopmode',
     \ ],
     \}
+

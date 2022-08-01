@@ -14,6 +14,7 @@ abbr -a gs 'git status'
 abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 
 set -U fish_greeting ""
+set -U EDITOR nvim
 bind \cs 'fish_commandline_prepend sdf'
 
 function apush
@@ -41,3 +42,8 @@ function d
 		cd ..
 	end
 end
+
+# Bun
+set -Ux BUN_INSTALL "/home/bourbon/.bun"
+set -px --path PATH "/home/bourbon/.bun/bin"
+

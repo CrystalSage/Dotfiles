@@ -1,5 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export BUN_INSTALL:/home/bourbon/\x2ebun
+SETUVAR EDITOR:nvim
 SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_bs:batstat
 SETUVAR _fish_abbr_cx:xclip\x20\x2dselection\x20clipboard
@@ -43,3 +45,4 @@ SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_user_paths:/home/bourbon/\x2elocal/bin\x1e/home/bourbon/\x2efzf/bin
+SETUVAR nvim:\x1d
