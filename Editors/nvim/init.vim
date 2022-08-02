@@ -18,6 +18,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'chriskempson/base16-vim'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " LSP Stuff
 Plug 'neovim/nvim-lspconfig'
@@ -122,9 +123,8 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 
 " Bling
 set termguicolors
-colorscheme base16-gruvbox-dark-hard
 let g:lightline = {
-  \ 'colorscheme': 'deus',
+  \ 'colorscheme': 'tokyonight',
 \ }
 
 if exists('+termguicolors')
@@ -133,9 +133,17 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+let g:tokyonight_style = "night"
+let g:tokyonight_colors = {
+  \ 'comment': 'orange',
+\ }
+
+" Load the colorscheme
+colorscheme tokyonight
+
  " Customize the highlight a bit.
 " Make comments more prominent -- they are important.
-call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+" call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 
 "============================================================================== 
 " # Keyboard shortcuts 
