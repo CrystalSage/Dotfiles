@@ -49,8 +49,6 @@ function fish_greeting
 	if [ $r -lt 5 ] # only occasionally show backlog (5%)
 		echo -e " \e[1mBacklog\e[0;32m"
 		set_color blue
-		echo "  [learn] django"
-		echo "  [learn] dsa"
 		echo
 	end
 
@@ -70,6 +68,7 @@ function fish_greeting
 	if [ $r -lt 50 ]
 		# upcoming, so prompt regularly
 		set_color yellow
+
 	end
 
 	# urgent, so prompt always

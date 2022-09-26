@@ -10,7 +10,7 @@ picom -b &
 mpd &
 xsetroot -cursor_name left_ptr &
 setxkbmap -layout us -option ctrl:swapcaps &
-xinput set-prop "ETPS/2 Elantech Touchpad" 315 1 &
+xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1 &
 dunst &
 
 bspc monitor -d I II III IV V

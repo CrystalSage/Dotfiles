@@ -29,6 +29,7 @@ Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
 Plug 'hrsh7th/cmp-path', {'branch': 'main'}
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " Only because nvim-cmp _requires_ snippets
 Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
@@ -180,6 +181,8 @@ nnoremap P "+p
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>tb :Tabularize /\|<CR>
 
+nnoremap <Leader>f. :e /home/bourbon/.config/nvim/init.vim<CR>
+
 " <leader><leader> toggles between buffers
 nnoremap <leader><leader> <c-^>
 
@@ -201,11 +204,11 @@ nnoremap <leader>_ dt_
 nnoremap <leader>, dt,
 
 " Window positioning
-nnoremap <leader>vm <C-W>\|
-nnoremap <leader>vr <C-W>=
+nnoremap <leader>vm <C-W>\| <C-W>_
+nnoremap <leader>vr <C-W>= 
 
 " Project shortcuts
-nnoremap <leader>ps :Rg<CR>
+nnoremap <leader>s :Rg<CR>
 
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
@@ -228,6 +231,34 @@ local cmp = require'cmp'
 local lspconfig = require'lspconfig'
 
 require("nvim-lsp-installer").setup {}
+
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "vim", "javascript", "vue", "css", "bash",  "c", "lua", "rust" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  auto_install = true,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { "javascript" },
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 
 -- Setup completion
 cmp.setup({

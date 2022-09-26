@@ -11,6 +11,7 @@ SETUVAR _fish_abbr_gah:git\x20stash\x3b\x20and\x20git\x20pull\x20\x2d\x2drebase\
 SETUVAR _fish_abbr_gc:git\x20checkout
 SETUVAR _fish_abbr_gp:git\x20push
 SETUVAR _fish_abbr_gs:git\x20status
+SETUVAR _fish_abbr_gt:git\x20log\x20\x2d\x2dgraph\x20\x2d\x2doneline\x20\x2d\x2dall
 SETUVAR _fish_abbr_o:xdg\x2dopen
 SETUVAR _fish_abbr_paci:yay\x20\x2dS
 SETUVAR _fish_abbr_yr:cal\x20\x2dy

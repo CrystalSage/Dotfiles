@@ -16,24 +16,36 @@ super + shift + f
 super + shift + s
 	flameshot gui
 
+super + shift + l
+	slock
+
 super + shift + n
 	alacritty --class Custom_ncmpcpp -e ncmpcpp
 
-super + shift + d
-	alacritty --class TodoClass -e nvim ~/todo
-
-super + shift + b
-	notify-send "Battery at" (batstat)%
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
+
+# Media keys
 XF86AudioMicMute
 	amixer set Capture toggle
 	
 XF86AudioMute
 	amixer set Master toggle
+
+XF86MonBrightnessDown
+  brightnessctl s 5-
+
+XF86MonBrightnessUp
+  brightnessctl s 5+
+
+XF86Display
+	notify-send "Battery at" (batstat)%
+
+Print
+  flameshot gui
 
 super + g
 	bspc node newest.local -s biggest.local
