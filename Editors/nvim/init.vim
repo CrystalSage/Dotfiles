@@ -123,28 +123,26 @@ set shortmess+=c " don't give |ins-completion-menu| messages.
 set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 
 " Bling
-set termguicolors
-let g:lightline = {
-  \ 'colorscheme': 'tokyonight',
-\ }
-
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
-let g:tokyonight_style = "night"
-let g:tokyonight_colors = {
-  \ 'comment': 'orange',
-\ }
+if !has('gui_running')
+  set t_Co=256
+endif
 
-" Load the colorscheme
-colorscheme tokyonight
+set background=dark
+let base16colorspace=256
+let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
+colorscheme base16-gruvbox-dark-hard
+syntax on
+hi Normal ctermbg=NONE
 
  " Customize the highlight a bit.
 " Make comments more prominent -- they are important.
-" call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 
 "============================================================================== 
 " # Keyboard shortcuts 
@@ -240,7 +238,7 @@ require'nvim-treesitter.configs'.setup {
   sync_install = false,
 
   -- Automatically install missing parsers when entering buffer
-  auto_install = true,
+  auto_install = false,
 
   -- List of parsers to ignore installing (for "all")
   ignore_install = { "javascript" },
@@ -330,7 +328,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- Rust
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
   flags = {
@@ -350,37 +348,6 @@ lspconfig.rust_analyzer.setup {
   },
   capabilities = capabilities,
 }
-
--- Vue 
-lspconfig.volar.setup {
-	on_attach=on_attach,
-	capabilities=capabilities,
-}
-
--- Tailwind setup
-local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover,   {border = 'rounded'}),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help,  {border = 'rounded'}),
-}
-
-
-lspconfig.tailwindcss.setup {
-  capabilities = require('lsp.servers.tsserver').capabilities,
-  filetypes = require('lsp.servers.tailwindcss').filetypes,
-  handlers = handlers,
-  init_options = require('lsp.servers.tailwindcss').init_options,
-  on_attach = require('lsp.servers.tailwindcss').on_attach,
-  settings = require('lsp.servers.tailwindcss').settings,
-}
-
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
-)
 END
 
 " Enable type inlay hints
