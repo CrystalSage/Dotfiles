@@ -1,11 +1,14 @@
 (setq doom-font (font-spec :family "JetBrains Mono" :size 19 :weight 'Medium)
       doom-variable-pitch-font (font-spec :family "Raleway" :size 13))
-(setq doom-theme 'doom-gruvbox)
+
+(setq doom-theme 'doom-one)
 
 (setq org-directory "~/org/")
 
 (setq display-line-numbers-type t)
+
 (global-set-key [f9] 'save-buffer)
+
 (setq rustic-flycheck-clippy-params "--message-format=json")
 
 (custom-set-faces!
@@ -27,20 +30,8 @@
 (require 'ox)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
 
-(use-package! websocket
-    :after org-roam)
+(setq fancy-splash-image (concat doom-user-dir "splash.png"))
+;; Hide the menu for as minimalistic a startup screen as possible.
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 
-(use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
-
-(setq org-roam-directory "~/roam")
-(use-package! lsp-tailwindcss)
+(setq org-hide-emphasis-markers t)

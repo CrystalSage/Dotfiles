@@ -6,3 +6,5 @@
 (package! vue-mode)
 (package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
 (package! mindre-theme :recipe (:host github :repo "erikbackman/mindre-theme"))
+(package! inkpot-theme)
+(package! gruber-darker-theme)

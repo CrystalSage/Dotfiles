@@ -38,6 +38,7 @@ Plug 'hrsh7th/vim-vsnip'
 " Language specific configurations
 Plug 'lervag/vimtex'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 call plug#end()
 
@@ -58,6 +59,8 @@ set splitbelow
 set undodir=~/.vimdid
 set undofile
 
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
 " Decent wildmenu
 set wildmenu
 set wildmode=list:longest
@@ -75,6 +78,7 @@ set formatoptions+=r " continue comments when pressing ENTER in I mode
 set formatoptions+=q " enable formatting of comments with gq
 set formatoptions+=n " detect lists for formatting
 set formatoptions+=b " auto-wrap in insert mode, and do not wrap old long lines
+set linebreak
 
 "Proper search
 set incsearch
@@ -136,13 +140,17 @@ endif
 set background=dark
 let base16colorspace=256
 let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
-colorscheme base16-gruvbox-dark-hard
+colorscheme gd
 syntax on
 hi Normal ctermbg=NONE
 
+let g:lightline = {
+      \ 'colorscheme': 'deus',
+	\ }
+
  " Customize the highlight a bit.
 " Make comments more prominent -- they are important.
-call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+" call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 
 "============================================================================== 
 " # Keyboard shortcuts 
@@ -178,6 +186,7 @@ nnoremap P "+p
 " Leader prefixed shortcuts
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>tb :Tabularize /\|<CR>
+vnoremap <Leader>de :g/^$/d<CR>
 
 nnoremap <Leader>f. :e /home/bourbon/.config/nvim/init.vim<CR>
 
@@ -232,13 +241,13 @@ require("nvim-lsp-installer").setup {}
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "vim", "javascript", "vue", "css", "bash",  "c", "lua", "rust" },
+  ensure_installed = { "vim", "javascript", "vue", "css", "bash",  "c", "lua", "rust", "latex" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
   -- Automatically install missing parsers when entering buffer
-  auto_install = false,
+  auto_install = true,
 
   -- List of parsers to ignore installing (for "all")
   ignore_install = { "javascript" },
