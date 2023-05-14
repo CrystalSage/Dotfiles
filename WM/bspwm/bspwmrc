@@ -4,13 +4,19 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 $HOME/.config/polybar/launch.sh
 
+# Java application bugfixes
+wmname LG3D &
+export _JAVA_AWT_WM_NONREPARENTING=1
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
+
+# Startup programs
 nitrogen --restore &
 xset r rate 300 30 &
+xrandr --output HDMI-0 --brightness 0.5
 picom -b &
 mpd &
 xsetroot -cursor_name left_ptr &
 setxkbmap -layout us -option ctrl:swapcaps &
-xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1 &
 dunst &
 
 bspc monitor -d I II III IV V
@@ -32,3 +38,5 @@ bspc rule -a Pavucontrol state=floating
 bspc rule -a '*:Custom_ncmpcpp' state=floating
 bspc rule -a 'burp-StartBurp' state=floating
 bspc rule -a 'ghidra-Ghidra' state=floating
+bspc rule -a 'jetbrains-studio' state=floating
+bspc rule -a 'Nitrogen' state=floating

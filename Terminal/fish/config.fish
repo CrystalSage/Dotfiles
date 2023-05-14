@@ -13,6 +13,7 @@ abbr -a gp 'git push'
 abbr -a gs 'git status'
 abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
 abbr -a gt 'git log --graph --oneline --all'
+abbr -a gco 'git checkout'
 
 set -U fish_greeting ""
 set -U EDITOR nvim
