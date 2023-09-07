@@ -20,8 +20,8 @@ set zoom-min 10
 # zathurarc-dark
 
 set font "Noto Sans Mono 14"
-set default-bg "#000000" #00
-set default-fg "#F7F7F6" #01
+set default-bg "#1d2021" #00
+set default-fg "#a9b1d6" #01
 
 set statusbar-fg "#B0B0B0" #04
 set statusbar-bg "#202020" #01
@@ -47,8 +47,8 @@ set completion-fg "#E0E0E0" #0C
 set notification-bg "#90A959" #0B
 set notification-fg "#151515" #00
 
-set recolor-lightcolor "#000000" #00
-set recolor-darkcolor "#E0E0E0" #06
+set recolor-lightcolor "#1d2021" #00
+set recolor-darkcolor "#d5c4a1" #06
 set recolor-reverse-video "true"
 set recolor-keephue "true"
 

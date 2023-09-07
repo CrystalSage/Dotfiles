@@ -18,7 +18,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'chriskempson/base16-vim'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " LSP Stuff
 Plug 'neovim/nvim-lspconfig'
@@ -29,7 +28,7 @@ Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
 Plug 'hrsh7th/cmp-path', {'branch': 'main'}
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
-" Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " Only because nvim-cmp _requires_ snippets
 Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
@@ -59,7 +58,6 @@ set splitbelow
 set undodir=~/.vimdid
 set undofile
 
-" let g:mkdp_markdown_css = '/home/bourbon/.markdown.css'
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " Decent wildmenu
@@ -119,7 +117,7 @@ set number " Also show absolute line number of current line
 set diffopt+=iwhite " No whitespace in vimdiff
 set diffopt+=algorithm:patience
 set diffopt+=indent-heuristic
-set colorcolumn=100 " and give me a colored column
+set colorcolumn=80 " and give me a colored column
 set showcmd " Show (partial) command in status line.
 set shortmess+=c " don't give |ins-completion-menu| messages.
 
@@ -138,11 +136,11 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-syntax on
 set background=dark
 let base16colorspace=256
-let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
-colorscheme base16-gruvbox-dark-hard
+" let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
+colorscheme gruvbox
+syntax on
 hi Normal ctermbg=NONE
 
 let g:lightline = {
@@ -151,7 +149,7 @@ let g:lightline = {
 
  " Customize the highlight a bit.
 " Make comments more prominent -- they are important.
-call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
+" call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 
 "============================================================================== 
 " # Keyboard shortcuts 
@@ -187,11 +185,8 @@ nnoremap P "+p
 " Leader prefixed shortcuts
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>tb :Tabularize /\|<CR>
+nnoremap <Leader>pv :Ex<CR>
 vnoremap <Leader>de :g/^$/d<CR>
-
-" Insert numbers at the start of visually selected lines.
-" These are auto-incremented.
-vnoremap <Leader>nl :!awk '{print NR".", $0}'<CR>
 
 nnoremap <Leader>f. :e /home/bourbon/.config/nvim/init.vim<CR>
 
@@ -204,11 +199,14 @@ nnoremap <leader>q :q<CR>
 " Go to the repository on Github
 nnoremap <leader>gv :!gh browse<CR>
 
-" Open the file explorer
-nnoremap <leader>pv :Ex<CR>
-
 " Markdown preview in browser
 nnoremap <leader>mp :MarkdownPreviewToggle<CR>
+
+" Greatest remap ever
+xnoremap <leader>p "_dP
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 
 " Keymap for replacing up to next symbol
 " Useful for when editing code
@@ -218,6 +216,9 @@ nnoremap <leader>) dt)
 nnoremap <leader>_ dt_
 nnoremap <leader>, dt,
 
+" Put a thing inside brackets in quotes
+nnoremap <leader>s" F(a"<Esc>f)i"<Esc>
+
 " Window positioning
 nnoremap <leader>vm <C-W>\| <C-W>_
 nnoremap <leader>vr <C-W>= 
@@ -225,7 +226,7 @@ nnoremap <leader>vr <C-W>=
 " Project shortcuts
 nnoremap <leader>s :Rg<CR>
 
-map <C-p> :Files<CR>
+map <C-p> :GitFiles<CR>
 nmap <leader>; :Buffers<CR>
 
 tnoremap <Esc> <C-\><C-n>
@@ -247,33 +248,33 @@ local lspconfig = require'lspconfig'
 
 require("nvim-lsp-installer").setup {}
 
--- require'nvim-treesitter.configs'.setup {
---   -- A list of parser names, or "all"
---   ensure_installed = { "vim", "javascript", "vue", "css", "bash",  "c", "lua", "rust", "latex" },
--- 
---   -- Install parsers synchronously (only applied to `ensure_installed`)
---   sync_install = false,
--- 
---   -- Automatically install missing parsers when entering buffer
---   auto_install = true,
--- 
---   -- List of parsers to ignore installing (for "all")
---   ignore_install = { "javascript" },
--- 
---   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
---   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
--- 
---   highlight = {
---     -- `false` will disable the whole extension
---     enable = true,
--- 
---     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
---     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
---     -- Using this option may slow down your editor, and you may see some duplicate highlights.
---     -- Instead of true it can also be a list of languages
---     additional_vim_regex_highlighting = false,
---   },
--- }
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "vim", "javascript", "vue", "css", "bash",  "c", "lua", "rust", "latex" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  auto_install = true,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { "javascript" },
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 
 -- Setup completion
 cmp.setup({

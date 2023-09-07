@@ -8,12 +8,11 @@ abbr -a cx 'xclip -selection clipboard'
 
 abbr -a g git
 abbr -a ga 'git add -p'
-abbr -a gc 'git checkout'
-abbr -a gp 'git push' 
-abbr -a gs 'git status'
-abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
-abbr -a gt 'git log --graph --oneline --all'
 abbr -a gco 'git checkout'
+abbr -a gpu 'git push' 
+abbr -a gst 'git status'
+abbr -a gah 'git stash; and git pull --rebase; and git stash pop'
+abbr -a glg 'git log --graph --oneline --all'
 
 set -U fish_greeting ""
 set -U EDITOR nvim

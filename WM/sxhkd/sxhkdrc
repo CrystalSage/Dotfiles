@@ -16,12 +16,11 @@ super + shift + f
 super + shift + s
 	flameshot gui
 
-super + shift + l
-	slock
-
 super + shift + n
 	alacritty --class Custom_ncmpcpp -e ncmpcpp
 
+super + shift + q
+	qr
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -47,8 +46,6 @@ XF86Display
 Print
   flameshot gui
 
-super + g
-	bspc node newest.local -s biggest.local
 #
 # bspwm hotkeys
 #
@@ -69,9 +66,9 @@ super + m
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
-# swap the current node and the biggest window
+# Move the currently selected window to a preselected area/node. 
 super + g
-	bspc node -s biggest.window
+	bspc node focused -n newest.!automatic.local
 
 #
 # state/flags
