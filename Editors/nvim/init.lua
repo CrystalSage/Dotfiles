@@ -269,6 +269,76 @@ require("lazy").setup({
 		},
 
 	},
+
+	-- Markdown 
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons"
+		},
+	},
+	{
+		"nvim-java/nvim-java",
+		config = function()
+			require "java".setup { }
+			require "lspconfig".jdtls.setup({})
+		end,
+	},
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"nvim-neotest/nvim-nio",
+		},
+		config = function()
+			local dap =  require("dap")
+
+			local dapui = require("dapui")
+
+			vim.api.nvim_set_hl(0, "blue",   { fg = "#ff0000" }) 
+			vim.api.nvim_set_hl(0, "green",  { fg = "#9ece6a" }) 
+			vim.api.nvim_set_hl(0, "yellow", { fg = "#FFFF00" }) 
+			vim.api.nvim_set_hl(0, "orange", { fg = "#f09000" }) 
+
+			vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
+			vim.fn.sign_define('DapBreakpointCondition', { text='•', texthl='blue',   linehl='DapBreakpoint', numhl='DapBreakpoint' })
+			vim.fn.sign_define('DapBreakpointRejected',  { text='•', texthl='orange', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+			vim.fn.sign_define('DapStopped',             { text='•', texthl='green',  linehl='DapBreakpoint', numhl='DapBreakpoint' })
+			vim.fn.sign_define('DapLogPoint',            { text='•', texthl='yellow', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+
+			vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, {})
+
+			dapui.setup()
+
+			dap.listeners.before.attach.dapui_config = function()
+			  dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+			  dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+			  dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+			  dapui.close()
+			end
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			require "nvim-treesitter.configs".setup {
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+				indent = {
+					enable = true
+				},
+			}
+		end,
+	},
 	{
 	'neovim/nvim-lspconfig',
 	config = function()
@@ -327,7 +397,7 @@ require("lazy").setup({
 				vim.keymap.set('n', '<leader>wl', function()
 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 				end, opts)
-				--vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+				vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
 				vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
 				vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, opts)
 				vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
@@ -358,6 +428,7 @@ require("lazy").setup({
 		-- these dependencies will only be loaded when cmp loads
 		-- dependencies are always lazy-loaded unless specified otherwise
 		dependencies = {
+			"onsails/lspkind.nvim",
 			'neovim/nvim-lspconfig',
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -366,6 +437,16 @@ require("lazy").setup({
 		config = function()
 			local cmp = require'cmp'
 			cmp.setup({
+				formatting = {
+					format = require "lspkind".cmp_format {
+						mode = "symbol"
+					},
+				},
+				window = {
+					completion = {
+						border = "rounded",
+					},
+				},
 				snippet = {
 					-- REQUIRED by nvim-cmp. get rid of it once we can
 					expand = function(args)
@@ -382,7 +463,7 @@ require("lazy").setup({
 					['<CR>'] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
-					{ name = 'nvim_lsp' },
+					{ name = 'nvim_lsp', max_item_count=5 },
 				}, {
 					{ name = 'path' },
 				}),
